@@ -5,11 +5,6 @@ include '../class/Ventana.php';
 $ventana=new Ventana();
 $ventana->validar_sesion();
 $ventana->venNombre="Ventana dashboard";
-
-/* OBTENER DATA */
-$arrEventos=include '../data/eventos.php';
-/**/
-
 $ventana->iniciar_ventana();
 $ventana->incluir_menu();
 ?>
@@ -176,9 +171,12 @@ var dashboard={
 </script>
 <script>
 var app = angular.module('Sistema', []);
-app.controller('Ventana', function($scope) {
+app.controller('Ventana', function($scope,$http) {
     
-    $scope.arrEventos=<?php $ventana->mostrar_arrJS($arrEventos)?>;        
+    $http.get("../data/eventos.php").then(function (response){
+        $scope.arrEventos = response.data; 
+        dashboard.generar_grid1($scope.arrEventos); 
+    });
     
     $scope.ordenarPor = function(x) {
         $scope.ordenadoPor = x;
@@ -186,9 +184,7 @@ app.controller('Ventana', function($scope) {
     
     $scope.ver=function(id){
         $scope.filtro2=id;
-    };
-    
-    dashboard.generar_grid1($scope.arrEventos);
+    };  
     
     dashboard.mostrar_grafico1();    
     dashboard.mostrar_grafico2();

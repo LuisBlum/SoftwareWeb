@@ -1,5 +1,5 @@
 <?php
-$arrEventos=array(
+$arr=array(
     array("id"=>1, "nombre"=>"Evento 1", "fecha"=>"2019-10-31"),
     array("id"=>2, "nombre"=>"Evento 2", "fecha"=>"2019-11-15"),
     array("id"=>4, "nombre"=>"Evento 4", "fecha"=>"2019-11-25"),
@@ -13,9 +13,10 @@ $arrEventos=array(
     array("id"=>11, "nombre"=>"Evento 11", "fecha"=>"2019-11-20")    
 );
 
-return $arrEventos;
 /*
 $query='SELECT * FROM TABLA';
-return $ventana->arrQuery($query);
-//$ventana->mostrar_arrJS($arrClientes); 
+$arr=$ventana->arrQuery($query);
 */
+
+
+echo json_encode($arr);

@@ -5,11 +5,6 @@ include '../class/Ventana.php';
 $ventana=new Ventana();
 $ventana->validar_sesion();
 $ventana->venNombre="Ventana inicio";
-
-/* OBTENER DATA */
-$arrEventos=include '../data/eventos.php';
-/**/
-
 $ventana->iniciar_ventana();
 $ventana->incluir_menu();
 ?>
@@ -108,9 +103,9 @@ $ventana->incluir_menu();
 <script src="../js/w3Accordion.js"></script>
 <script>
 var app = angular.module('Sistema', []);
-app.controller('Ventana', function($scope) {
+app.controller('Ventana', function($scope,$http) {
     
-    $scope.arrEventos=<?php $ventana->mostrar_arrJS($arrEventos)?>;        
+    $http.get("../data/eventos.php").then(function (response) { $scope.arrEventos = response.data; });
     
     $scope.ordenarPor = function(x) {
         $scope.ordenadoPor = x;
